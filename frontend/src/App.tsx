@@ -32,7 +32,7 @@ const App = () => {
   // Function to handle reset button click
   const generatePassword = React.useCallback(async () => {
     try {
-      const response = await axios.post("http://localhost:5000/generate-password", {
+      const response = await axios.post("https://go2cod-sd-04.onrender.com/generate-password", {
         length: passwordLength,
         options,
       });
@@ -173,7 +173,7 @@ const App = () => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="Numbers"
+                    name="numbers"
                     checked={options.numbers}
                     onChange={handleCheckboxChange}
                   />
@@ -182,7 +182,7 @@ const App = () => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    name="Special Characters"
+                    name="special"
                     checked={options.special}
                     onChange={handleCheckboxChange}
                   />

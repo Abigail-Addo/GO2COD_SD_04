@@ -17,14 +17,14 @@ const generatePassword = (length, options) => {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     numbers: "0123456789",
-    specialCharacter: "!@#$%^&*()_+[]{}<>?",
+    special: "!@#$%^&*()_+[]{}<>?",
   };
 
   let allChars = "";
   if (options.lowercase) allChars += charTypes.lowercase;
   if (options.uppercase) allChars += charTypes.uppercase;
   if (options.numbers) allChars += charTypes.numbers;
-  if (options.specialCharacter) allChars += charTypes.specialCharacter;
+  if (options.special) allChars += charTypes.special;
 
   if (allChars.length === 0)
     return "Please select at least one character type.";
