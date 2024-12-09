@@ -29,7 +29,7 @@ const App = () => {
   });
 
 
-  // Function to handle reset button click
+  // Function to generate password
   const generatePassword = React.useCallback(async () => {
     try {
       const response = await axios.post("https://go2cod-sd-04.onrender.com/generate-password", {
@@ -37,6 +37,20 @@ const App = () => {
         options,
       });
       setPassword(response.data.password);
+
+      // Check the strength of the generated password
+      if (passwordLength < 6) {
+        setStrengthLevel('very weak');
+      } else if (passwordLength < 8) {
+        setStrengthLevel('weak');
+      } else if (passwordLength < 12) {
+        setStrengthLevel('moderate');
+      } else if (passwordLength < 16) {
+        setStrengthLevel('strong');
+      } else {
+        setStrengthLevel('very strong');
+      }
+
     } catch (error) {
       console.error("Error generating password:", error);
     }
@@ -44,22 +58,7 @@ const App = () => {
 
   React.useEffect(() => {
     generatePassword();
-  }, [generatePassword]);
-
-  // Update strength level based on password length
-  React.useEffect(() => {
-    if (passwordLength < 6) {
-      setStrengthLevel('very weak');
-    } else if (passwordLength < 8) {
-      setStrengthLevel('weak');
-    } else if (passwordLength < 12) {
-      setStrengthLevel('moderate');
-    } else if (passwordLength < 16) {
-      setStrengthLevel('strong');
-    } else {
-      setStrengthLevel('very strong');
-    }
-  }, [passwordLength]);
+  }, [generatePassword, passwordLength, options]);
 
   // Handle slider change
   const handleSliderChange = (_event: Event | SyntheticEvent, value: number | number[]) => {
